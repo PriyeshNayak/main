@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Download env.sh from another repo
         run: |
-          curl -O https://raw.githubusercontent.com/PriyeshNayak/DevOps/blob/main/env.sh
+          curl -O https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/env.sh
           sh env.sh     
           ls -la
       - name: Display contents of env.sh
