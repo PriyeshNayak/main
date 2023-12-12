@@ -1,0 +1,26 @@
+name: Build & Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download env.sh from another repo
+        run: |
+          curl -O https://raw.githubusercontent.com/PriyeshNayak/DevOps/blob/main/env.sh
+          sh env.sh     
+          ls -la
+      - name: Display contents of env.sh
+        run: |
+          ls -la
+          cat env.sh
+      - name: Upload .env as an artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: env
+          path: .env
