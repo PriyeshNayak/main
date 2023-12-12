@@ -17,8 +17,8 @@ jobs:
           chmod +x env.sh
           ./env.sh 
           cat .env
-          API_KEY= ${{secrets.API_KEY}}
-          echo "API_Key: $API_KEY"
+          
+          echo "API_Key: ${{secrets.API_KEY}}"
       - name: Display environment variables
         run: |
           echo "API_KEY from GitHub Actions environment: $API_KEY"
