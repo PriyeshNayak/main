@@ -15,17 +15,25 @@ jobs:
         run: |
           curl -sSL https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/env.sh -o env.sh
           chmod +x env.sh
-          ./env.sh     
-          ls -la
-      - name: Display contents of env.sh
+          ./env.sh > env_values 
+          cat env_values
+          
+      - name: Display environment variables
         run: |
-          ls -la
-          cat env.sh
+          echo "API_KEY from GitHub Actions environment: $API_KEY"
+          echo "DATABASE_URL from GitHub Actions environment: $DATABASE_URL"
+          
       - name: Upload .env as an artifact
         uses: actions/upload-artifact@v2
         with:
           name: env
           path: .env
+
+      - name: Display contents of env.sh
+        run: |
+          ls -la
+          cat env.sh
+          
       - name: Deploy
         run: |
           API_KEY=$(grep 'API_KEY' env_values | cut -d'=' -f2)
