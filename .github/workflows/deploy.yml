@@ -19,6 +19,7 @@ jobs:
           cat .env
           
           echo "API_Key=${{secrets.API_KEY}}" >> .envtest
+          ls -la
           cat .envtest
       - name: Display environment variables
         run: |
