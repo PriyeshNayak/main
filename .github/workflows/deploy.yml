@@ -29,8 +29,10 @@ jobs:
       - name: Upload .env as an artifact
         uses: actions/upload-artifact@v2
         with:
-          name: env
-          path: .env
+          # name: env
+          # path: .env
+          name: envtest
+          path: .envtest
 
       - name: Display contents of env.sh
         run: |
