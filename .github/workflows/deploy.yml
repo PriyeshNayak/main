@@ -19,7 +19,6 @@ jobs:
           cat .env
           
           echo "API_Key=${{secrets.API_KEY}}"
-          $API_Key=${{secrets.API_KEY}}
           echo "API_KEY= $API_KEY"
       - name: Display environment variables
         run: |
