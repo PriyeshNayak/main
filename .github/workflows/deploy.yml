@@ -18,7 +18,8 @@ jobs:
           ./env.sh 
           cat .env
           
-          echo "API_Key: ${{secrets.API_KEY}}"
+          echo "API_Key=${{secrets.API_KEY}}"
+          echo "$API_KEY"
       - name: Display environment variables
         run: |
           echo "API_KEY from GitHub Actions environment: $API_KEY"
