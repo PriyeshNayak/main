@@ -16,6 +16,7 @@ jobs:
           curl -sSL https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/.env -o .env
           ls -la
           cat .env
+          sh .env
         
           # echo "API_Key=${{secrets.API_KEY}}" >> .env  
           # ls -la
