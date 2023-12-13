@@ -14,8 +14,7 @@ jobs:
       - name: Download env.sh from another repo
         run: |
           curl -sSL https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/env.sh -o env.sh
-          ls -la  
-          cat env.sh
+          ls -la 
           bash env.sh
         
           # echo "API_Key=${{secrets.API_KEY}}" >> .env
