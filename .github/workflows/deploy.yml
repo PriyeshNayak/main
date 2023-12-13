@@ -17,12 +17,16 @@ jobs:
     runs-on: ubuntu-latest 
     environment: dev
     steps:
+      - name: Checkout config-repo
+        uses: actions/checkout@v2
+        with:
+          repository: PriyeshNayak/DevOps
+          ref: ${{ github.event.inputs.config-repo-ref }}
+          path: config-repo
+
       - name: Download env.sh from another repo
         run: |
-          ENV_FILE_URL="https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/.env"
-          curl -sSL "$ENV_FILE_URL" | while IFS= read -r line; do
-            echo "$line" >> .env
-          done
+          cat .env
           
         
           # curl -sSL https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/.env -o .env
