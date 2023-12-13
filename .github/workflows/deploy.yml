@@ -20,8 +20,8 @@ jobs:
           # echo "API_Key=${{secrets.API_KEY}}" >> .env  
           # ls -la
           # cat .env
-      - name: Generate .env file
-        run: echo "# Auto-generated .env file" > .env && curl -sSL https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/env.sh >> .env
+      # - name: Generate .env file
+      #   run: echo "# Auto-generated .env file" > .env && curl -sSL https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/env.sh >> .env
           
       - name: Run env.sh script
         run: sh env.sh
