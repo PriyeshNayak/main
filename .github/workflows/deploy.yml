@@ -1,6 +1,12 @@
 name: Build & Deploy
 
 on:
+  workflow_dispatch:
+    inputs:
+      config-repo-ref:
+        description: 'main'
+        required: true
+        default: 'main'
   push:
     branches:
       - main
