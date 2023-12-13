@@ -21,25 +21,9 @@ jobs:
           # echo "API_Key=${{secrets.API_KEY}}" >> .env
           # ls -la
           # cat .env
-      - name: Display environment variables
-        run: |
-          echo "API_KEY from GitHub Actions environment: $API_KEY"
-          echo "DATABASE_URL from GitHub Actions environment: $DATABASE_URL"
           
       - name: Upload .env as an artifact
         uses: actions/upload-artifact@v2
         with:
           name: env
           path: .env
-          # name: envtest
-          # path: .envtest
-
-      - name: Display contents of env.sh
-        run: |
-          ls -la
-          cat env.sh
-          
-      - name: Deploy
-        run: |
-          API_KEY=$(grep 'API_KEY' env_values | cut -d'=' -f2)
-          DATABASE_URL=$(grep 'DATABASE_URL' env_values | cut -d'=' -f2)
