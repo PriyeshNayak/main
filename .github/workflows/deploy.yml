@@ -17,7 +17,6 @@ jobs:
           ls -la  
           cat env.sh
           bash env.sh
-          cat .env
         
           # echo "API_Key=${{secrets.API_KEY}}" >> .env
           # ls -la
