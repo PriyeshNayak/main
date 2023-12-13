@@ -24,14 +24,10 @@ jobs:
           ref: ${{ github.event.inputs.config-repo-ref }}
           path: config-repo
 
-      - name: Load env.sh
-        run: |
-          source config-repo/.env
-
       - name: Download env.sh from another repo
         run: |
           ls -la
-          cat .env
+          cat config-repo/.env
           
         
           # curl -sSL https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/.env -o .env
