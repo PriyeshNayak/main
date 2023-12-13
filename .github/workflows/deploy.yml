@@ -15,14 +15,14 @@ jobs:
         run: |
           curl -sSL https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/env.sh -o env.sh
           ls -la  
-          cat env.sh
-          chmod +x env.sh
-          cat env.sh | sh
-          cat .env
+          # cat env.sh
+          # chmod +x env.sh
+          # cat env.sh | sh
+          # cat .env
         
-          # echo "API_Key=${{secrets.API_KEY}}" >> .envtest
-          # ls -la
-          # cat .envtest
+          echo "API_Key=${{secrets.API_KEY}}" >> .env
+          ls -la
+          cat .env
       - name: Display environment variables
         run: |
           echo "API_KEY from GitHub Actions environment: $API_KEY"
