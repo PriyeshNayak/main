@@ -13,20 +13,16 @@ jobs:
     steps:
       - name: Download env.sh from another repo
         run: |
-          curl -sSL https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/.env -o .env
-          ls -la
-          cat .env
+          ENV_FILE_URL="https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/.env"
+          curl -sSL "$ENV_FILE_URL" | while IFS= read -r line; do
+            echo "$line"
+          done
           
         
-          # echo "API_Key=${{secrets.API_KEY}}" >> .env  
+          # curl -sSL https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/.env -o .env
           # ls -la
           # cat .env
-      # - name: Generate .env file
-      #   run: echo "# Auto-generated .env file" > .env && curl -sSL https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/env.sh >> .env
-          
-      # - name: Run env.sh script
-      #   run: sh env.sh
-          
+
       - name: Upload .env as an artifact
         uses: actions/upload-artifact@v2
         with:
