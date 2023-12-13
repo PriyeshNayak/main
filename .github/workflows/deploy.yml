@@ -20,8 +20,15 @@ jobs:
           # echo "API_Key=${{secrets.API_KEY}}" >> .env
           # ls -la
           # cat .env
-      - name: Generate .env file
-        run: echo "# Auto-generated .env file" > .env && curl -sSL https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/env.sh >> .env
+      # - name: Generate .env file
+      #   run: echo "# Auto-generated .env file" > .env && curl -sSL https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/env.sh >> .env
+
+      - name: Replace placeholders with secrets
+        run: |
+          secrets=$(env | grep -oP "secrets.[^=]+" | cut -d'=' -f1)
+          for secret in $secrets; do
+            sed -i "s/%${secret}%/${!secret}/g" env.sh
+          done
           
       - name: Run env.sh script
         run: sh env.sh
