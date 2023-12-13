@@ -15,15 +15,15 @@ jobs:
         run: |
           ENV_FILE_URL="https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/.env"
           curl -sSL "$ENV_FILE_URL" | while IFS= read -r line; do
-            echo $line=${{secrets.$line}} >> .env
+            echo $line
           done
           
         
           # curl -sSL https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/.env -o .env
           # ls -la
           # cat .env
-      # - name: Upload .env as an artifact
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: env
-      #     path: .env
+      - name: Upload .env as an artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: env
+          path: .env
