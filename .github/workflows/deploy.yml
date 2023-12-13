@@ -1,12 +1,6 @@
 name: Build & Deploy
 
 on:
-  workflow_dispatch:
-    inputs:
-      config-repo-ref:
-        description: 'main'
-        required: true
-        default: 'main'
   push:
     branches:
       - main
@@ -17,25 +11,19 @@ jobs:
     runs-on: ubuntu-latest 
     environment: dev
     steps:
-      - name: Checkout config-repo
-        uses: actions/checkout@v2
-        with:
-          repository: PriyeshNayak/DevOps
-          ref: ${{ github.event.inputs.config-repo-ref }}
-          path: config-repo
-
       - name: Download env.sh from another repo
         run: |
-          ls -la
-          cat config-repo/.env
+          ENV_FILE_URL="https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/.env"
+          curl -sSL "$ENV_FILE_URL" | while IFS= read -r line; do
+            echo "$line"
+          done
           
         
           # curl -sSL https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/.env -o .env
           # ls -la
           # cat .env
-
-      - name: Upload .env as an artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: env
-          path: .env
+      # - name: Upload .env as an artifact
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: env
+      #     path: .env
