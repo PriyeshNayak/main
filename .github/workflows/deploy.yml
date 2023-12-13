@@ -17,7 +17,7 @@ jobs:
           ls -la  
           cat env.sh
           chmod +x env.sh
-          bash -eux env.sh
+          cat env.sh | sh
           cat .env
         
           # echo "API_Key=${{secrets.API_KEY}}" >> .envtest
