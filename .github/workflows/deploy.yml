@@ -15,9 +15,9 @@ jobs:
         run: |
           ENV_FILE_URL="https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/.env"
           curl -sSL "$ENV_FILE_URL" | while IFS= read -r line; do
-            $var=$line
-            $line= ${{secrets.var}} 
-            echo "$line= ${{secrets.var}}"
+            var=$line
+            $line= ${{ secrets.var }} 
+            echo "$line= ${{ secrets.var }}"
             
           done
           
