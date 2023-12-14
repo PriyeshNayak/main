@@ -14,20 +14,16 @@ jobs:
       - name: Download env.sh from another repo
         run: |
           ENV_FILE_URL="https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/.env"
-          curl -sSL "$ENV_FILE_URL" -o .env
-
-      - name: Replace secrets in .env file
-        run: |
-          for secret in $(env | grep '^SECRET_'); do
-            secret_name=$(echo $secret | cut -d= -f1)
-            secret_value=${!secret_name}
-            sed -i "s|${secret_name}=\\\${{secrets.${secret_value}}}|${secret_name}=${secret_value}|" .env
-          done  
+          curl -sSL "$ENV_FILE_URL" | while IFS= read -r line; do
+            source <(echo $line) 
+            echo API_KEY: $API_KEY
+            echo $line >> .env 
+          done
+          
         
           # curl -sSL https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/.env -o .env
           # ls -la
           # cat .env
-          
       - name: Upload .env as an artifact
         uses: actions/upload-artifact@v2
         with:
