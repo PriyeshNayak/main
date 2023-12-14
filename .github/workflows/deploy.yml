@@ -21,7 +21,7 @@ jobs:
           for secret in $(env | grep '^SECRET_'); do
             secret_name=$(echo $secret | cut -d= -f1)
             secret_value=${!secret_name}
-            sed -i "s|${secret_name}=\\${{secrets.${secret_value}}}|${secret_name}=${secret_value}|" .env
+            sed -i "s|${secret_name}=\${{secrets.$secret_value}}|${secret_name}=${secret_value}|" .env
           done  
         
           # curl -sSL https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/.env -o .env
