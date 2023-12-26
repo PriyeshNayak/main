@@ -17,7 +17,7 @@ jobs:
           curl -sSL "$ENV_FILE_URL" | while IFS= read -r line; do
             echo $line
             var="$line"
-            echo ${{secrets.${var}}}
+            echo ${{secrets.var}} "check"
           done
           
         
