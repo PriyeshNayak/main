@@ -36,7 +36,6 @@ jobs:
           name: env_json
       - name: Extract env from json
         run: |
-          apt update
           apt install jq
           sh script.sh env.json >> .env
 
