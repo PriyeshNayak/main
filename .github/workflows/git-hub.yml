@@ -1,0 +1,56 @@
+name: Build & Deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_call:
+    inputs:
+      envfile:
+        type: string
+
+jobs:
+  envgen:
+    name: envgen
+    runs-on: ubuntu-latest 
+    environment: dev
+    steps:
+      - name: Download artifacts envfile
+        uses: actions/download-artifact@v3
+        with:
+          name: envfile
+      - run: |
+          echo "$ALLMYSECRETS" >> env.json
+        shell: bash
+        env:
+          ALLMYSECRETS: ${{ toJSON(secrets) }}
+          ALLMYVARS: ${{ toJSON(vars) }}
+          
+      - name: Upload .envtest as an artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: env json
+          path: env.json
+
+  build: 
+    name: Build
+    runs-on: ubuntu-latest 
+    environment: dev
+    steps:
+      - name: Download artifacts envfile
+        uses: actions/download-artifact@v3
+        with:
+          name: env
+      - name: Extract env from json
+        run: |
+          apt update
+          apt install jq
+          sh envscript.sh env.json >> .env
+
+      - name: Upload .envtest as an artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: env
+          path: .env
+          
+            
