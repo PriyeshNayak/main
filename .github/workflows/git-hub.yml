@@ -15,10 +15,7 @@ jobs:
     runs-on: ubuntu-latest 
     environment: dev
     steps:
-      - name: Download artifacts envfile
-        uses: actions/download-artifact@v3
-        with:
-          name: envfile
+      - name: Extract json envfile
       - run: |
           echo "$ALLMYSECRETS" >> env.json
         shell: bash
@@ -45,7 +42,7 @@ jobs:
         run: |
           apt update
           apt install jq
-          sh envscript.sh env.json >> .env
+          sh script.sh env.json >> .env
 
       - name: Upload .envtest as an artifact
         uses: actions/upload-artifact@v2
