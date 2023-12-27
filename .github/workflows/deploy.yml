@@ -28,7 +28,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest 
     needs: envgen
-    environment: dev
+    environment: prod
     env:
       BUILD_SECRETS: ${{ secrets[format('{0}', inputs.envfile)] }}
     steps:
