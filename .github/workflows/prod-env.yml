@@ -9,7 +9,7 @@ jobs:
   envgen-prod:
     name: envgen (prod)
     runs-on: ubuntu-latest 
-    environment: dev
+    environment: prod
     steps:
       - name: Extract json envfile
         run: |
