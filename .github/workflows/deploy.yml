@@ -40,8 +40,7 @@ jobs:
           cat envfile
           
       - name: Dynamic env writing
-        run: |
-          echo $BUILD_SECRETS 
+        run: | 
           echo ${{env.BUILD_SECRETS}} 
           echo ${{env.BUILD_SECRETS}} > .envval
 
