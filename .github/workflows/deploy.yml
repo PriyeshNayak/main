@@ -38,6 +38,7 @@ jobs:
           name: envfile
       - run: |
           echo "$ALLMYSECRETS"
+          echo "$ALLMYSECRETS" >> env.json
           echo "$ALLMYVARS"
         shell: bash
         env:
