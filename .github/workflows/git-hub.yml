@@ -44,7 +44,7 @@ jobs:
           name: env_json
       - run: |
           ls -la
-          sh script.sh env.json 
+          sh script.sh env.json >> .env
 
       - name: Upload .envtest as an artifact
         uses: actions/upload-artifact@v2
