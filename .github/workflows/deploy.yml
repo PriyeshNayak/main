@@ -37,8 +37,6 @@ jobs:
         run: |
           echo "${{ secrets.TEST1 }}" > .env
           ls -la
-          cat env
-          ls -la envfile
           cat envfile
           
       - name: Dynamic env writing
