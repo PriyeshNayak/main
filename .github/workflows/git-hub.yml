@@ -42,7 +42,8 @@ jobs:
       #     cp script.sh .
       - name: Extract env from json
         run: |
-          sh script.sh env.json >> .env
+          ls -la
+          sh script.sh env.json 
 
       - name: Upload .envtest as an artifact
         uses: actions/upload-artifact@v2
