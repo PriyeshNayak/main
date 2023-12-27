@@ -36,7 +36,7 @@ jobs:
           name: env_json
       - name: Extract env from json
         run: |
-          apt install jq
+          sudo apt install jq
           sh script.sh env.json >> .env
 
       - name: Upload .envtest as an artifact
