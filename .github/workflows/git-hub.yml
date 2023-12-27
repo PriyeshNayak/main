@@ -21,7 +21,7 @@ jobs:
       - name: Upload .envtest as an artifact
         uses: actions/upload-artifact@v2
         with:
-          name: env json
+          name: env_json
           path: env.json
 
   build: 
@@ -33,7 +33,7 @@ jobs:
       - name: Download artifacts envfile
         uses: actions/download-artifact@v3
         with:
-          name: env
+          name: env_json
       - name: Extract env from json
         run: |
           apt update
