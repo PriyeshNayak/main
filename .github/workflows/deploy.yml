@@ -1,66 +1,66 @@
-name: Build & Deploy
+# name: Build & Deploy
 
-on:
-  push:
-    branches:
-      - main
-  workflow_call:
-    inputs:
-      envfile:
-        type: string
+# on:
+#   push:
+#     branches:
+#       - main
+#   workflow_call:
+#     inputs:
+#       envfile:
+#         type: string
 
-jobs:
-  envgen:
-    name: envgen
-    runs-on: ubuntu-latest
-    steps:
-      - name: generate env 
-        run: |
-          curl -sSL https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/env -o envfile
-          ls -la
-          cat envfile
-      - name: Upload .env as an artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: envfile
-          path: envfile
-  build: 
-    name: Build
-    runs-on: ubuntu-latest 
-    needs: envgen
-    environment: prod
-    env:
-      BUILD_SECRETS: ${{ secrets[format('{0}', inputs.envfile)] }}
-    steps:
-      - name: Download artifacts envfile
-        uses: actions/download-artifact@v3
-        with:
-          name: envfile
-      - run: |
-          echo "$ALLMYSECRETS"
-          echo "$ALLMYSECRETS" >> env.json
-          echo "$ALLMYVARS"
-        shell: bash
-        env:
-          ALLMYSECRETS: ${{ toJSON(secrets) }}
-          ALLMYVARS: ${{ toJSON(vars) }}
+# jobs:
+#   envgen:
+#     name: envgen
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: generate env 
+#         run: |
+#           curl -sSL https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/env -o envfile
+#           ls -la
+#           cat envfile
+#       - name: Upload .env as an artifact
+#         uses: actions/upload-artifact@v2
+#         with:
+#           name: envfile
+#           path: envfile
+#   build: 
+#     name: Build
+#     runs-on: ubuntu-latest 
+#     needs: envgen
+#     environment: prod
+#     env:
+#       BUILD_SECRETS: ${{ secrets[format('{0}', inputs.envfile)] }}
+#     steps:
+#       - name: Download artifacts envfile
+#         uses: actions/download-artifact@v3
+#         with:
+#           name: envfile
+#       - run: |
+#           echo "$ALLMYSECRETS"
+#           echo "$ALLMYSECRETS" >> env.json
+#           echo "$ALLMYVARS"
+#         shell: bash
+#         env:
+#           ALLMYSECRETS: ${{ toJSON(secrets) }}
+#           ALLMYVARS: ${{ toJSON(vars) }}
     
-      - name: Dynamic env writing
-        run: | 
-          cat envfile
-          echo ${{env.BUILD_SECRETS}} 
-          echo ${{env.BUILD_SECRETS}} > .envtest
+#       - name: Dynamic env writing
+#         run: | 
+#           cat envfile
+#           echo ${{env.BUILD_SECRETS}} 
+#           echo ${{env.BUILD_SECRETS}} > .envtest
 
-          # curl -sSL https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/.env -o .env
-          # ls -la
-          # cat .env
-                    # ENV_FILE_URL="https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/.env"
-          # curl -sSL "$ENV_FILE_URL" | while IFS= read -r line; do
-          #   echo $line
-          # done
-      - name: Upload .envtest as an artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: env
-          path: env.json
+#           # curl -sSL https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/.env -o .env
+#           # ls -la
+#           # cat .env
+#                     # ENV_FILE_URL="https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/.env"
+#           # curl -sSL "$ENV_FILE_URL" | while IFS= read -r line; do
+#           #   echo $line
+#           # done
+#       - name: Upload .envtest as an artifact
+#         uses: actions/upload-artifact@v2
+#         with:
+#           name: env
+#           path: env.json
 
