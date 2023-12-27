@@ -37,9 +37,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # - name: Copy file from repository
-      #   run: |
-      #     cp script.sh .
+      - name: Upload script as an artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: script
+          path: script.sh
       - name: Extract env from json
         run: |
           ls -la
