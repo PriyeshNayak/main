@@ -12,9 +12,8 @@ jobs:
     environment: dev
     steps:
       - name: Extract json envfile
-      - run: |
+        run: |
           echo "$ALLMYSECRETS" >> env.json
-        shell: bash
         env:
           ALLMYSECRETS: ${{ toJSON(secrets) }}
           ALLMYVARS: ${{ toJSON(vars) }}
