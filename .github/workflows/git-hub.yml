@@ -37,9 +37,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Copy file from repository
-        run: |
-          cp script.sh .
+      # - name: Copy file from repository
+      #   run: |
+      #     cp script.sh .
       - name: Extract env from json
         run: |
           sh script.sh env.json >> .env
