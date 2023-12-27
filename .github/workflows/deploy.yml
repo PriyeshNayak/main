@@ -41,7 +41,9 @@ jobs:
           
       - name: Dynamic env writing
         run: |
-          echo $BUILD_SECRETS > .envtest
+          echo $BUILD_SECRETS 
+          echo ${{env.BUILD_SECRETS}} 
+          echo ${{en.BUILD_SECRETS}} > .envval
 
           # curl -sSL https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/.env -o .env
           # ls -la
@@ -61,3 +63,8 @@ jobs:
         with:
           name: envtest
           path: .envtest
+      - name: Upload .envtest as an artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: envval
+          path: .envval
