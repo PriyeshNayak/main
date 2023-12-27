@@ -30,10 +30,6 @@ jobs:
     needs: envgen
     environment: dev
     steps:
-      - name: Download artifacts envfile
-        uses: actions/download-artifact@v3
-        with:
-          name: env_json
       - name: Checkout repository
         uses: actions/checkout@v2
 
@@ -42,8 +38,11 @@ jobs:
         with:
           name: script
           path: script.sh
-      - name: Extract env from json
-        run: |
+      - name: Download artifacts envfile and Extract env from json
+        uses: actions/download-artifact@v3
+        with:
+          name: env_json
+      - run: |
           ls -la
           sh script.sh env.json 
 
