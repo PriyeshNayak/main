@@ -41,7 +41,7 @@ jobs:
       - name: Read envfile and set environment variables
         run: |
           while IFS= read -r line; do
-          eval "export $line=\${{ secrets[$line] }}"
+          eval "export $line=${{ secrets[\$line] }}"
           done < envfile
     
       - name: Dynamic env writing
