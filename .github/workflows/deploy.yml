@@ -21,14 +21,15 @@ jobs:
     needs: envgen
     environment: dev
     env:
-      BUILD_SECRETS: ${{ secrets[format('{0}_BUILD_SECRETS', inputs.envfile)] }}
+      BUILD_SECRETS: ${{ secrets[format('{0}', inputs.envfile)] }}
     steps:
       - name: Download env.sh from another repo
         run: |
           echo "${{ secrets.TEST1 }}" > .env
           ls -la
           cat env
-
+          ls -la envfile
+          cat envfile
           
       - name: Dynamic env writing
       - run: |
