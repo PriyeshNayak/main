@@ -41,7 +41,7 @@ jobs:
           
       - name: Dynamic env writing
         run: |
-          echo "$BUILD_SECRETS"
+          echo $BUILD_SECRETS
 
           # curl -sSL https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/.env -o .env
           # ls -la
