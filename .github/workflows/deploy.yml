@@ -36,17 +36,12 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: envfile
-          
-      - name: Download env.sh from another repo
-        run: |
-          echo "${{ secrets.TEST1 }}" > .env
-          ls -la
-          cat envfile
     
       - name: Dynamic env writing
         run: | 
+          cat envfile
           echo ${{env.BUILD_SECRETS}} 
-          echo ${{env.BUILD_SECRETS}} > .envval
+          echo ${{env.BUILD_SECRETS}} > .envtest
 
           # curl -sSL https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/.env -o .env
           # ls -la
@@ -54,20 +49,10 @@ jobs:
                     # ENV_FILE_URL="https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/.env"
           # curl -sSL "$ENV_FILE_URL" | while IFS= read -r line; do
           #   echo $line
-            
           # done
-      - name: Upload .env as an artifact
+      - name: Upload .envtest as an artifact
         uses: actions/upload-artifact@v2
         with:
           name: env
           path: .env
-      - name: Upload .envtest as an artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: envtest
-          path: .envtest
-      - name: Upload .envtest as an artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: envval
-          path: .envval
+
