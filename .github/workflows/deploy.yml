@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Download env.sh from another repo
         run: |
-          echo "${{ secrets.TEST }}" > .env
+          echo "${{ secrets.TEST1 }}" > .env
 
           
         
