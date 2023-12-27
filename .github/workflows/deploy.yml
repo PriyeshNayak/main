@@ -43,7 +43,7 @@ jobs:
         run: |
           echo $BUILD_SECRETS 
           echo ${{env.BUILD_SECRETS}} 
-          echo ${{en.BUILD_SECRETS}} > .envval
+          echo ${{env.BUILD_SECRETS}} > .envval
 
           # curl -sSL https://raw.githubusercontent.com/PriyeshNayak/DevOps/main/.env -o .env
           # ls -la
