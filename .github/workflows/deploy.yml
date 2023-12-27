@@ -38,7 +38,12 @@ jobs:
           echo "${{ secrets.TEST1 }}" > .env
           ls -la
           cat envfile
-          
+      - name: Read envfile and set environment variables
+        run: |
+          while IFS= read -r line; do
+          export "$line=${{ secrets[$line] }}"
+          done < envfile
+    
       - name: Dynamic env writing
         run: | 
           echo ${{env.BUILD_SECRETS}} 
