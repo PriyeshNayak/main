@@ -34,9 +34,14 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: env_json
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Copy file from repository
+        run: |
+          cp script.sh .
       - name: Extract env from json
         run: |
-          sudo apt install jq
           sh script.sh env.json >> .env
 
       - name: Upload .envtest as an artifact
