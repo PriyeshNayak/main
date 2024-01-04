@@ -39,11 +39,11 @@ jobs:
           ALLMYSECRETS: ${{ toJSON(secrets) }}
           ALLMYVARS: ${{ toJSON(vars) }}
 
-      # - name: Upload script as an artifact
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: script
-      #     path: script.sh
+      - name: Upload script as an artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: script
+          path: script.sh
       - name: Download artifacts envfile and Extract env from json
         uses: actions/download-artifact@v3
         # with:
